@@ -1,6 +1,6 @@
 {
   "name": "@exoplay/exobot-build",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "build and run tools for exobot",
   "main": "index.js",
   "bin": {
