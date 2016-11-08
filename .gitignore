@@ -1,0 +1,9 @@
+*.swp
+~*
+node_modules/
+npm-debug.log
+start.sh
+build/
+example/
+data
+exobot.*
