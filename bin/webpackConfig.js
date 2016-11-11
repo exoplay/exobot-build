@@ -37,16 +37,20 @@ module.exports = function (options) {
           exclude: /node_modules/,
           loader: 'babel-loader',
           query: {
+            cacheDirectory: true,
             presets: [
-              [ 'es2015', { loose: true, modules: false } ],
-              'stage-2',
+              [ require.resolve('babel-preset-es2015'), {
+                loose: true,
+                modules: false
+              } ],
+              require.resolve('babel-preset-stage-2'),
             ],
             plugins: [
               'syntax-decorators',
               'transform-class-properties',
               'transform-decorators-legacy',
               'transform-decorators',
-            ]
+            ].map(p => require.resolve(`babel-plugin-${p}`))
           }
         }
       ]

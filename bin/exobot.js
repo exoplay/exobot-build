@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 const webpack = require('webpack');
 const config = require('./webpackConfig');
+const path = require('path');
+
+const defaultName = path.parse(process.cwd()).name + '.js';
 
 const argv = require('yargs')
               .usage('exobot <command> [options]')
@@ -24,8 +27,8 @@ const argv = require('yargs')
               .default({
                 'source-directory': './src',
                 'dest-directory': './',
-                input: './src/exobot.js',
-                output: 'exobot.js',
+                input: `./src/${defaultName}`,
+                output: defaultName,
                 extensions: '.js,.json',
                 cwd: process.cwd() + '/',
               })
