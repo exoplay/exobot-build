@@ -24,6 +24,8 @@ const argv = require('yargs')
               .nargs('e', 1)
               .alias('c', 'cwd')
               .nargs('c', 1)
+              .alias('w', 'watch')
+              .nargs('w', 1)
               .default({
                 'source-directory': './src',
                 'dest-directory': './',
@@ -31,6 +33,7 @@ const argv = require('yargs')
                 output: defaultName,
                 extensions: '.js,.json',
                 cwd: process.cwd() + '/',
+                watch: false,
               })
               .argv;
 
