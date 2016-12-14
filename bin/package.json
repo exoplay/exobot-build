@@ -1,0 +1,11 @@
+{
+  "name": "an-exobot-instance",
+  "version": "1.0.0",
+  "description": "an instance of exobot",
+  "main": "exobot.js",
+  "dependencies": {
+    "@exoplay/exobot": "^4.0.0",
+    "regenerator-runtime": "^0.9.6",
+    "source-map-support": "^0.4.6"
+  }
+}
