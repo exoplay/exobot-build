@@ -47,9 +47,9 @@ module.exports = function (options) {
             ],
             plugins: [
               'syntax-decorators',
-              'transform-class-properties',
               'transform-decorators-legacy',
               'transform-decorators',
+              'transform-class-properties',
             ].map(p => require.resolve(`babel-plugin-${p}`))
           }
         }
