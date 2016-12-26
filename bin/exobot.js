@@ -46,8 +46,6 @@ function build(args, callback) {
   const webpackConfig = config(argv);
   const compiler = webpack(webpackConfig);
 
-  console.log(`Beginning build from ${argv.cwd}${argv.i}`);
-
   if (argv._[0] === 'watch') {
     compiler.watch({}, (err, stats) => {
       if (err) { return console.error(err); }

@@ -16,10 +16,11 @@ module.exports = function (options) {
   const input = options.input;
   const output = options.output;
   const cwd = options.cwd;
+  const modulesDir = path.join(cwd, 'node_modules');
 
   return {
     target: 'node',
-    externals: [ externals() ],
+    externals: [ externals({ modulesDir }) ],
     devtool: 'inline-source-map',
     context: path.join(cwd, sourceDir),
     entry: {
@@ -39,17 +40,30 @@ module.exports = function (options) {
           query: {
             cacheDirectory: true,
             presets: [
-              [ require.resolve('babel-preset-es2015'), {
-                loose: true,
-                modules: false
-              } ],
               require.resolve('babel-preset-stage-2'),
             ],
             plugins: [
+              'transform-export-extensions',
               'syntax-decorators',
               'transform-decorators-legacy',
               'transform-decorators',
+
+              /* a few things from es2015 preset */
+              'transform-es2015-object-super',
               'transform-class-properties',
+              'transform-es2015-classes',
+
+              /* a few things from babili */
+              'minify-constant-folding',
+              'minify-dead-code-elimination',
+              'minify-infinity',
+              'minify-numeric-literals',
+              'minify-replace',
+              'transform-merge-sibling-variables',
+              'transform-minify-booleans',
+              'transform-regexp-constructors',
+              'transform-remove-undefined',
+              'transform-undefined-to-void',
             ].map(p => require.resolve(`babel-plugin-${p}`))
           }
         }
@@ -66,7 +80,7 @@ module.exports = function (options) {
         clear: false,
         format: 'build [:bar] ' + chalk.green(':percent') + ' (:elapsed seconds)',
       }),
-      //new webpack.ProgressPlugin(),
+      //new webpack.NoErrorsPlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: true
@@ -76,7 +90,7 @@ module.exports = function (options) {
         raw: true,
         entryOnly: false,
       }),
-      new webpack.optimize.UglifyJsPlugin({
+      /*new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
         },
@@ -85,7 +99,7 @@ module.exports = function (options) {
           comments: false
         },
         sourceMap: true
-      }),
+      }),*/
     ],
     node: {
       global: false,
