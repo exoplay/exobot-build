@@ -42,25 +42,38 @@ const argv = require('yargs')
               })
               .argv;
 
+function logResult (err, stats) {
+  if(err) {
+    return console.error(err);
+  }
+
+  var jsonStats = stats.toJson();
+
+  if(jsonStats.errors.length > 0) {
+    return console.error(jsonStats.errors);
+  }
+
+  if(jsonStats.warnings.length > 0) {
+    console.warn(jsonStats.warnings);
+  }
+
+  console.log(`Wrote to ${argv.d}${argv.o}`);
+}
+
 function build(args, callback) {
   const webpackConfig = config(argv);
   const compiler = webpack(webpackConfig);
 
   if (argv._[0] === 'watch') {
     compiler.watch({}, (err, stats) => {
-      if (err) { return console.error(err); }
-
-      console.log(`Wrote to ${argv.d}${argv.o}`);
-
+      logResult(err, stats);
       if (callback) {
         callback();
       }
     });
   } else {
     compiler.run((err, stats) => {
-      if (err) { return console.error(err); }
-
-      console.log(`Wrote to ${argv.d}${argv.o}`);
+      logResult(err, stats);
 
       if (callback) {
         callback();

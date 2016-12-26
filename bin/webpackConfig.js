@@ -21,7 +21,7 @@ module.exports = function (options) {
   return {
     target: 'node',
     externals: [ externals({ modulesDir }) ],
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     context: path.join(cwd, sourceDir),
     entry: {
       js: path.join(cwd, input),
@@ -90,16 +90,19 @@ module.exports = function (options) {
         raw: true,
         entryOnly: false,
       }),
-      /*new webpack.optimize.UglifyJsPlugin({
+      /*
+      new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false
+          warnings: true
         },
+        mangle: false,
         debug: true,
         output: {
           comments: false
         },
         sourceMap: true
-      }),*/
+      }),
+      */
     ],
     node: {
       global: false,
