@@ -108,7 +108,7 @@ function buildFromConfig(args, configFile, callback) {
   const botFileContents = [
     `require('babel-polyfill')`,
     `const config = require('${configFile}')`,
-    `const { Exobot } = require('../exobot');`,
+    `const { Exobot } = require('@exoplay/exobot');`,
     `const bot = new Exobot(config);`,
     `module.exports = bot;`,
   ].join('\n');
@@ -138,7 +138,7 @@ switch (argv._[0]) {
     const exobotSourceExists = fs.existsSync(inputFile);
 
     if (!exobotSourceExists) {
-      if(fs.exists(configFile)) {
+      if(fs.existsSync(configFile)) {
         exobotPath = configFile;
       }
     }
