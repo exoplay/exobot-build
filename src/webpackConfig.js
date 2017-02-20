@@ -10,12 +10,14 @@ module.exports = function (options) {
     options.extensions = options.extensions.split(',');
   }
 
-  const sourceDir = options['source-directory'];
-  const extensions = options.extensions;
-  const destDir = options['dest-directory'];
+  const extensions = ['.js', '.json'];
+
   const input = options.input;
   const output = options.output;
   const cwd = options.cwd;
+
+  const sourceDir = path.parse(input).dir;
+  const destDir = path.parse(output).dir;
   const modulesDir = path.join(cwd, 'node_modules');
 
   return {
@@ -24,11 +26,11 @@ module.exports = function (options) {
     devtool: 'source-map',
     context: path.join(cwd, sourceDir),
     entry: {
-      js: path.join(cwd, input),
+      js: path.parse(input).base,
     },
     output: {
       path: path.join(cwd, destDir),
-      filename: output,
+      filename: path.parse(output).base,
       libraryTarget: 'commonjs'
     },
     module: {
@@ -40,7 +42,7 @@ module.exports = function (options) {
           query: {
             cacheDirectory: true,
             presets: [
-              require.resolve('babel-preset-stage-2'),
+              'babel-preset-stage-2',
             ],
             plugins: [
               'transform-export-extensions',
@@ -64,7 +66,7 @@ module.exports = function (options) {
               'transform-regexp-constructors',
               'transform-remove-undefined',
               'transform-undefined-to-void',
-            ].map(p => require.resolve(`babel-plugin-${p}`))
+            ].map(p => `babel-plugin-${p}`)
           }
         }
       ]
@@ -90,19 +92,6 @@ module.exports = function (options) {
         raw: true,
         entryOnly: false,
       }),
-      /*
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: true
-        },
-        mangle: false,
-        debug: true,
-        output: {
-          comments: false
-        },
-        sourceMap: true
-      }),
-      */
     ],
     node: {
       global: false,
