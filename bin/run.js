@@ -332,11 +332,7 @@ const defaultName = __WEBPACK_IMPORTED_MODULE_3_path___default.a.parse(process.c
   name: {
     default: 'exobot'
   }
-})).command('lint', 'Runs exobot style linter', {
-  fix: {
-    default: !1
-  }
-}).demand(1).boolean('watch').boolean('fix').boolean('f').boolean('start').alias('h', 'help').help('h').argv;
+})).demand(1).boolean('watch').boolean('start').alias('h', 'help').help('h').argv;
 
 function logResult(err, stats) {
   if (err) {
@@ -475,9 +471,6 @@ switch (argv._[0]) {
         break;
     }
     break;
-
-  case 'lint':
-  // run linter
 }
 
 /***/ })

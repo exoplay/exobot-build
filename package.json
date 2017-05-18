@@ -1,6 +1,6 @@
 {
   "name": "@exoplay/exobot-build",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "build and run tools for exobot",
   "main": "index.js",
   "bin": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/exoplay/exobot-build#readme",
   "dependencies": {
-    "@exoplay/exobot": "^4.2.2",
+    "@exoplay/exobot": "^4.2.3",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-plugin-syntax-decorators": "^6.13.0",
