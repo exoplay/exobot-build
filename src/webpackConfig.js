@@ -88,7 +88,7 @@ module.exports = function (options) {
         debug: true
       }),
       new webpack.BannerPlugin({
-        banner: 'require("source-map-support").install();require("regenerator-runtime/runtime");',
+        banner: 'require("regenerator-runtime/runtime");',
         raw: true,
         entryOnly: false,
       }),
