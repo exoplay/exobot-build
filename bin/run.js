@@ -1,4 +1,4 @@
-require("source-map-support").install();require("regenerator-runtime/runtime");
+require("regenerator-runtime/runtime");
 (function(e, a) { for(var i in a) e[i] = a[i]; }(exports, /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -147,7 +147,7 @@ module.exports = function (options) {
       minimize: !0,
       debug: !0
     }), new webpack.BannerPlugin({
-      banner: 'require("source-map-support").install();require("regenerator-runtime/runtime");',
+      banner: 'require("regenerator-runtime/runtime");',
       raw: !0,
       entryOnly: !1
     })],
