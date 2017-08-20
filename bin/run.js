@@ -162,8 +162,8 @@ module.exports = function (options) {
       clearTimeout: !1,
       setTimeout: !1,
       os: !1,
-      _filename: !0,
-      __dirname: !0
+      _filename: !1,
+      __dirname: !1
     }
   };
 };

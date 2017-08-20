@@ -104,8 +104,8 @@ module.exports = function (options) {
       clearTimeout: false,
       setTimeout: false,
       os: false,
-      _filename: true,
-      __dirname: true,
+      _filename: false,
+      __dirname: false,
     }
   };
 };
