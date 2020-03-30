@@ -21,6 +21,7 @@ module.exports = function (options) {
   const modulesDir = path.join(cwd, 'node_modules');
 
   return {
+    mode: process.env.NODE_ENV || 'production',
     target: 'node',
     externals: [ externals({ modulesDir }) ],
     devtool: 'source-map',
@@ -34,7 +35,7 @@ module.exports = function (options) {
       libraryTarget: 'commonjs'
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.js$/,
           exclude: /node_modules/,
@@ -42,31 +43,14 @@ module.exports = function (options) {
           query: {
             cacheDirectory: true,
             presets: [
-              'babel-preset-stage-2',
+              '@babel/env',
+              'babel-preset-minify',
             ],
             plugins: [
-              'transform-export-extensions',
-              'syntax-decorators',
-              'transform-decorators-legacy',
-              'transform-decorators',
-
-              /* a few things from es2015 preset */
-              'transform-es2015-object-super',
-              'transform-class-properties',
-              'transform-es2015-classes',
-
-              /* a few things from babili */
-              'minify-constant-folding',
-              'minify-dead-code-elimination',
-              'minify-infinity',
-              'minify-numeric-literals',
-              'minify-replace',
-              'transform-merge-sibling-variables',
-              'transform-minify-booleans',
-              'transform-regexp-constructors',
-              'transform-remove-undefined',
-              'transform-undefined-to-void',
-            ].map(p => `babel-plugin-${p}`)
+              ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+              ['@babel/plugin-proposal-class-properties', { 'loose' : true }],
+              'babel-plugin-syntax-export-extensions',
+            ],
           }
         }
       ]
@@ -86,11 +70,6 @@ module.exports = function (options) {
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: true
-      }),
-      new webpack.BannerPlugin({
-        banner: 'require("regenerator-runtime/runtime");',
-        raw: true,
-        entryOnly: false,
       }),
     ],
     node: {
