@@ -1,6 +1,6 @@
 {
   "name": "@exoplay/exobot-build",
-  "version": "1.2.0-beta.1",
+  "version": "1.2.0-beta.2",
   "description": "build and run tools for exobot",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,6 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
-    "@exoplay/exobot": "^5.0.0-rc.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-syntax-export-extensions": "^6.13.0",
     "babel-preset-minify": "^0.5.1",
@@ -40,7 +39,7 @@
     "generator-exobot": "0.0.13",
     "progress-bar-webpack-plugin": "^2.1.0",
     "source-map-support": "^0.5.16",
-    "webpack": "^4.42.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.5.4",
     "yargs": "^15.3.1",
