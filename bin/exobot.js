@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('./run.js');
+require('./exobot-build.js');

@@ -1,14 +1,14 @@
 {
   "name": "@exoplay/exobot-build",
-  "version": "1.2.0-beta.2",
+  "version": "2.0.0-beta.1",
   "description": "build and run tools for exobot",
   "main": "index.js",
   "bin": {
     "exobot": "./bin/exobot.js"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch"
+    "build": "webpack --config webpack.config.babel.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -30,25 +30,29 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
-    "babel-loader": "^8.1.0",
     "babel-plugin-syntax-export-extensions": "^6.13.0",
     "babel-preset-minify": "^0.5.1",
-    "chalk": "^3.0.0",
-    "change-case": "^4.1.1",
-    "fs-extra": "^9.0.0",
-    "generator-exobot": "0.0.13",
+    "chalk": "^4.0.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "source-map-support": "^0.5.16",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.5.4",
-    "yargs": "^15.3.1",
-    "yeoman-environment": "^2.8.1",
-    "yo": "^3.1.1"
+    "yargs": "^15.3.1"
   },
   "peerDependencies": {
-    "@exoplay/exobot": ">4.2",
+    "@exoplay/exobot": ">5",
     "source-map-support": "^0.5.16"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@exoplay/eslint-config-exobot": "^2.1.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2"
+  }
 }

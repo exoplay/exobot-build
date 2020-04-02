@@ -1,20 +1,19 @@
-const chalk = require('chalk');
-const webpack = require('webpack');
-const path = require('path');
+import path from 'path';
+import chalk from 'chalk';
+import webpack from 'webpack';
+import ProgressBarPlugin from 'progress-bar-webpack-plugin';
+import externals from 'webpack-node-externals';
 
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const externals = require('webpack-node-externals');
 
-module.exports = function (options) {
-  if (typeof options.extensions === 'string') {
-    options.extensions = options.extensions.split(',');
-  }
-
+export default (options) => {
   const extensions = ['.js', '.json'];
 
-  const input = options.input;
-  const output = options.output;
-  const cwd = options.cwd;
+  const {
+    input,
+    output,
+    cwd,
+    ...opts
+  } = options;
 
   const sourceDir = path.parse(input).dir;
   const destDir = path.parse(output).dir;
@@ -23,7 +22,7 @@ module.exports = function (options) {
   return {
     mode: process.env.NODE_ENV || 'production',
     target: 'node',
-    externals: [ externals({ modulesDir }) ],
+    externals: [externals({ modulesDir })],
     devtool: 'source-map',
     context: path.join(cwd, sourceDir),
     entry: {
@@ -32,7 +31,7 @@ module.exports = function (options) {
     output: {
       path: path.join(cwd, destDir),
       filename: path.parse(output).base,
-      libraryTarget: 'commonjs'
+      libraryTarget: 'commonjs',
     },
     module: {
       rules: [
@@ -47,29 +46,29 @@ module.exports = function (options) {
               'babel-preset-minify',
             ],
             plugins: [
-              ['@babel/plugin-proposal-decorators', { 'legacy': true }],
-              ['@babel/plugin-proposal-class-properties', { 'loose' : true }],
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
               'babel-plugin-syntax-export-extensions',
             ],
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     resolve: {
-      extensions: extensions,
+      extensions,
       modules: [
         path.join(cwd, sourceDir),
-      ]
+        path.join(cwd, 'node_modules'),
+      ],
     },
     plugins: [
       new ProgressBarPlugin({
         clear: false,
-        format: 'build [:bar] ' + chalk.green(':percent') + ' (:elapsed seconds)',
+        format: `build [:bar] ${chalk.green(':percent')} (:elapsed seconds)`,
       }),
-      //new webpack.NoErrorsPlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
-        debug: true
+        debug: true,
       }),
     ],
     node: {
@@ -85,6 +84,8 @@ module.exports = function (options) {
       os: false,
       _filename: false,
       __dirname: false,
-    }
+    },
+
+    ...(opts || {}),
   };
 };
