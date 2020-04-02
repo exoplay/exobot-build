@@ -54,7 +54,7 @@ function logResult(err, stats) {
     console.warn(jsonStats.warnings);
   }
 
-  return console.log(`Wrote to ${argv.o}`);
+  return console.log(`Built ${jsonStats.outputPath}/${jsonStats.assets[0].name}`);
 }
 
 function build(args, callback) {
