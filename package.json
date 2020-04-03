@@ -1,10 +1,10 @@
 {
   "name": "@exoplay/exobot-build",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "build and run tools for exobot",
   "main": "index.js",
   "bin": {
-    "exobot": "./bin/exobot.js"
+    "exobot-build": "./bin/exobot.js"
   },
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
