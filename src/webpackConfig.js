@@ -13,6 +13,7 @@ export default (options) => {
     output,
     cwd,
     env,
+    minify,
     ...opts
   } = options;
 
@@ -26,6 +27,10 @@ export default (options) => {
     },
 
     loose: true,
+  };
+
+  const babelMinify = minify || {
+    mangle: false,
   };
 
   return {
@@ -52,7 +57,7 @@ export default (options) => {
             cacheDirectory: true,
             presets: [
               ['@babel/env', babelEnv],
-              'babel-preset-minify',
+              ['babel-preset-minify', babelMinify],
             ],
             plugins: [
               ['@babel/plugin-proposal-decorators', { legacy: true }],
