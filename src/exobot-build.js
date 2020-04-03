@@ -26,7 +26,6 @@ const cwdOption = {
 
 const configOption = {
   alias: 'c',
-  default: 'webpack.config.js',
 };
 
 const { argv } = yargs
