@@ -12,12 +12,21 @@ export default (options) => {
     input,
     output,
     cwd,
+    env,
     ...opts
   } = options;
 
   const sourceDir = path.parse(input).dir;
   const destDir = path.parse(output).dir;
   const modulesDir = path.join(cwd, 'node_modules');
+
+  const babelEnv = env || {
+    targets: {
+      node: '10',
+    },
+
+    loose: true,
+  };
 
   return {
     mode: process.env.NODE_ENV || 'production',
@@ -42,7 +51,7 @@ export default (options) => {
           query: {
             cacheDirectory: true,
             presets: [
-              '@babel/env',
+              ['@babel/env', babelEnv],
               'babel-preset-minify',
             ],
             plugins: [
